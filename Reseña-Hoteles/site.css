@@ -1,0 +1,34 @@
+.column-right {
+    background-color: gray;
+    padding-top: 10px;
+    padding-left: 10px;
+    margin-left: 10px;
+    position: relative;
+    float: left;
+    width: 45%;
+    border: steelblue solid 1px;
+    height: 300px;
+}
+
+.column-left {
+    background-color :gray;
+    padding-left: 10px;
+    padding-top: 10px;
+    margin-left: 10px;
+    float: left;
+    position: relative;
+    width: 45%;
+    border: steelblue solid 1px;
+    height: auto;
+}
+
+.imagen{
+    width: 20%;
+    height: 20%;
+}
+
+.name{
+    font-size: 32px;
+    color: coral;
+}
+
