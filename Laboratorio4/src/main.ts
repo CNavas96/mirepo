@@ -32,9 +32,6 @@ function avanzarNumero  () : void {
         resultadoPantalla = resultadoPantalla + 1;
 
         pantalla.textContent = resultadoPantalla.toString().padStart(2, "0");
-    } else {
-        console.log("error");
-        console.log(pantalla);
     }
 }   
 
