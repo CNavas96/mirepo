@@ -4,7 +4,7 @@ function retrocederNumero  () : void {
     const pantalla = document.getElementById("numero-turno");
 
     if(pantalla !== null && pantalla !== undefined && pantalla instanceof HTMLHeadingElement){
-        let resultadoPantalla: number = parseInt(pantalla.textContent || "01", 10);
+        let resultadoPantalla: number = parseInt(pantalla.textContent || "00", 10);
 
         resultadoPantalla = resultadoPantalla - 1;
 
