@@ -105,6 +105,7 @@ function handlePlantarse () : void {
                 botonCartaAdicional !== null && botonCartaAdicional !== undefined && botonCartaAdicional instanceof HTMLButtonElement) {
                 imagenCartaAdicional.style.display = "inline";
                 botonCartaAdicional.style.display = "inline";
+                imagenCartaAdicional.src = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/back.jpg"; 
                 }
         }
         
