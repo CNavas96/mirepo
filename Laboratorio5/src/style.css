@@ -102,6 +102,9 @@ button:focus-visible {
 
 .contenedor-cartas{
   border-radius: 15%;
+  border: 32px;
+  padding: 32px;
+  margin: 32px;
 }
 .contedero-cartas img {
   max-width: 100px;
@@ -153,4 +156,24 @@ button:focus-visible {
   margin-right: 25px;
   background-color: rgb(194, 78, 194);
   color: rgb(63, 230, 77);
+}
+.carta-tapada{
+  border-radius: 15%;
+  border: 16px;
+  padding: 0.6em 1.2em;
+}
+
+.boton-mostrar-carta-adicional{
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  margin: 16px;
+  margin-right: 25px;
+  background-color: rgb(5, 112, 98);
+  color: rgb(179, 248, 68);
 }
