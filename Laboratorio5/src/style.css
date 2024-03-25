@@ -157,6 +157,10 @@ button:focus-visible {
   background-color: rgb(194, 78, 194);
   color: rgb(63, 230, 77);
 }
+
+.boton-plantarse:disabled{
+   background-color: gray ;
+}
 .carta-tapada{
   border-radius: 15%;
   border: 16px;
@@ -176,4 +180,8 @@ button:focus-visible {
   margin-right: 25px;
   background-color: rgb(5, 112, 98);
   color: rgb(179, 248, 68);
+}
+
+.mensaje{
+  color: red;
 }
