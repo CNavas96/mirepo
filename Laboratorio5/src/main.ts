@@ -1,3 +1,11 @@
+interface Puntuacion {
+    numero: number;
+}
+
+const puntuacionParaGanar: Puntuacion = {
+    numero:  7.5,
+}
+
 //1. Mostrar puntuación
 let score: number = 0;
 let cartaAdicional: number = 0;
@@ -63,7 +71,7 @@ const dameCarta = () : number => {
 
 function handlePedirCarta() : void {
     const cartaRecibida = document.getElementById("carta-recibida");
-        if (cartaRecibida !== null && cartaRecibida !== undefined && cartaRecibida instanceof HTMLImageElement){
+        if (cartaRecibida && cartaRecibida instanceof HTMLImageElement){
             const cartaObtenida : number = dameCarta();
             mostarCartaObtenida(cartaObtenida);
 
@@ -71,9 +79,10 @@ function handlePedirCarta() : void {
             const nuevoScore = actualizacionScore(puntuacionObtenida);
             mostrarPuntuacion(nuevoScore);
 
-            if (score > 7.5){
+            if (score > puntuacionParaGanar.numero){
                 mostrarMensaje("GAME OVER");
-                desactivarBotones();
+                desactivarBoton("boton-dameCarta");
+                desactivarBoton("boton-plantarse")
             };
         }
 };
@@ -101,7 +110,7 @@ const actualizacionScore = (nuevaActualizacionScore: number) : number =>{
 };
 // BOTON PEDIR CARTA
 const botonDameCarta = document.getElementById("boton-dameCarta");
-    if(botonDameCarta !== null && botonDameCarta !== undefined && botonDameCarta instanceof HTMLButtonElement){
+    if(botonDameCarta && botonDameCarta instanceof HTMLButtonElement){
         botonDameCarta.addEventListener("click", handlePedirCarta);
     } 
 
@@ -109,33 +118,48 @@ const botonDameCarta = document.getElementById("boton-dameCarta");
 
 //PLANTARSE
 function handlePlantarse () : void {
-    desactivarBotones();
+    desactivarBoton("boton-dameCarta");
+    desactivarBoton("boton-plantarse");
     mensajeResultado();
-    mostrarCartaAdicional();
+    handleMostrarCartaAdicional();
 };
 
 const mensajeResultado = () : void =>{
-    const pantallaPuntuacion = document.getElementById("mensaje");
-
-        if(pantallaPuntuacion !== null && pantallaPuntuacion !== undefined && pantallaPuntuacion instanceof HTMLHeadingElement) {
-            pantallaPuntuacion.textContent = score.toString();
-
             if(score <= 4 || score < 5){
                 mostrarMensaje("Has sido muy conservador");
             } else if(score === 5 || score < 6){
                 mostrarMensaje("No huele un poco raro aqui?");
             } else if(score >= 6 && score <= 7){
                 mostrarMensaje("Por porquito...");
-            } else if(score === 7.5){
+            } else if(score === puntuacionParaGanar.numero){
                 mostrarMensaje("LETS FUCKING GO!!! LO HAS LOGRADO");
             }
-        } 
+        
 };
+
 //BOTON PLANTARSE
 const botonPlantarse = document.getElementById("boton-plantarse");
-    if(botonPlantarse !== null && botonPlantarse !== undefined && botonPlantarse instanceof HTMLButtonElement) {
+    if(botonPlantarse && botonPlantarse instanceof HTMLButtonElement) {
         botonPlantarse.addEventListener("click", handlePlantarse);
     }
+
+// DESACTIVAR y ACTIVAR BOTONES 
+const desactivarBoton = (id: string) : void => {
+    const botonDesactivar = document.getElementById(id);
+
+    if (botonDesactivar  && botonDesactivar instanceof HTMLButtonElement) {
+        botonDesactivar.disabled = true;
+    }
+};
+
+const activarBoton = (id: string) : void => {
+    const botonActivar = document.getElementById(id);
+   
+        if(botonActivar !== null && botonActivar !== undefined && botonActivar instanceof HTMLButtonElement){
+                botonActivar.disabled = false;
+
+        }
+};
 
 
 
@@ -148,33 +172,6 @@ function mostarImagenCartaAdicional () : void {
         imagenCartaAdicional.src = cartaAdicionalSrc;
     }
 };
-
-//OCULTAR y Mostrar CARTA ADICIONAL
-const ocultarCartaAdicional = () : void =>{
-    const imagenCartaAdicional = document.getElementById("carta-adicional");
-    const botonCartaAdicional = document.getElementById("boton-mostrar-carta-adicional");
-    if (imagenCartaAdicional !== null && imagenCartaAdicional !== undefined && imagenCartaAdicional instanceof HTMLImageElement &&
-        botonCartaAdicional !== null && botonCartaAdicional !== undefined && botonCartaAdicional instanceof HTMLButtonElement) {
-        imagenCartaAdicional.style.display = "none";
-        botonCartaAdicional.style.display = "none";
-        imagenCartaAdicional.src = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/back.jpg";
-    }
-};
-const mostrarCartaAdicional = () : void =>{
-    if(score < 7.5){
-        cartaAdicional = dameCarta();
-
-        const imagenCartaAdicional = document.getElementById("carta-adicional");
-        const botonCartaAdicional = document.getElementById("boton-mostrar-carta-adicional");
-            if (imagenCartaAdicional !== null && imagenCartaAdicional !== undefined && imagenCartaAdicional instanceof HTMLImageElement &&
-            botonCartaAdicional !== null && botonCartaAdicional !== undefined && botonCartaAdicional instanceof HTMLButtonElement) {
-            imagenCartaAdicional.style.display = "inline";
-            botonCartaAdicional.style.display = "inline";
-            imagenCartaAdicional.src = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/back.jpg"; 
-            }
-    }
-};
-
 //BOTON CARTA ADICIONAL
 const botonCartaAdicional = document.getElementById("boton-mostrar-carta-adicional");
     if(botonCartaAdicional !== null && botonCartaAdicional !== undefined && botonCartaAdicional instanceof HTMLButtonElement){
@@ -182,54 +179,64 @@ const botonCartaAdicional = document.getElementById("boton-mostrar-carta-adicion
         botonCartaAdicional.style.display = "none";
     }
 
+ 
+//OCULTAR Y MOSTRAR CARTA ADICIONAL   
+const handleMostrarCartaAdicional = () : void =>{    
+    if(score < puntuacionParaGanar.numero){
+        cartaAdicional = dameCarta();
 
-
-
-
-// DESACTIVAR y ACTIVAR BOTONES
-const desactivarBotones = () : void => {
-    const botonDameCarta = document.getElementById("boton-dameCarta");
-    const botonPlantarse = document.getElementById("boton-plantarse");
-
-    if (botonDameCarta !== null && botonDameCarta !== undefined && botonDameCarta instanceof HTMLButtonElement &&
-        botonPlantarse !== null && botonPlantarse !== undefined && botonPlantarse instanceof HTMLButtonElement) {
-            botonDameCarta.disabled = true;
-            botonPlantarse.disabled = true;
-        }
-};
-
-const activarBotones = () : void => {
-    const botonPideCarta = document.getElementById("boton-dameCarta");
-    const botonPlantarse = document.getElementById("boton-plantarse");
-        if(botonPideCarta !== null && botonPideCarta !== undefined && botonPideCarta instanceof HTMLButtonElement &&
-            botonPlantarse !== null && botonPlantarse !== undefined && botonPlantarse instanceof HTMLButtonElement){
-                botonPideCarta.disabled = false;
-                botonPlantarse.disabled = false;
-        }
-};
-
-
-
-//Ocultar carta Adicional
-const ocultarCarta = () : void =>{
-    const imagenCartaAdicional = document.getElementById("carta-adicional");
-    const botonCartaAdicional = document.getElementById("boton-mostrar-carta-adicional");
-    if (imagenCartaAdicional !== null && imagenCartaAdicional !== undefined && imagenCartaAdicional instanceof HTMLImageElement &&
-        botonCartaAdicional !== null && botonCartaAdicional !== undefined && botonCartaAdicional instanceof HTMLButtonElement) {
-        imagenCartaAdicional.style.display = "none";
-        botonCartaAdicional.style.display = "none";
-        imagenCartaAdicional.src = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/back.jpg";
+        mostrarCartaAdicional("carta-adicional");
+        mostrarBoton("boton-mostrar-carta-adicional");
     }
 };
+
+//MOSTRAR
+const mostrarCartaAdicional = (id: string): void => {
+    const imagenCartaAdicional = document.getElementById(id);
+    if(imagenCartaAdicional && imagenCartaAdicional instanceof HTMLImageElement){
+        imagenCartaAdicional.style.display = "inline";
+    }
+};
+const mostrarBoton = (id: string): void => {
+    const botonMostrado = document.getElementById(id);
+    if(botonMostrado && botonMostrado instanceof HTMLButtonElement){
+        botonMostrado.style.display = "inline";
+    }
+};
+
+//OCULTAR 
+const ocultarBoton = (id: string) : void => {
+    const botonOcultado = document.getElementById(id);
+    if( botonOcultado && botonOcultado instanceof HTMLButtonElement){
+        botonOcultado.style.display= "none";
+    }
+};
+const ocultarCarta = (id: string): void => {
+    const cartaOcultada = document.getElementById(id);
+    if(cartaOcultada && cartaOcultada instanceof HTMLImageElement){
+        cartaOcultada.style.display = "none";
+    }
+};
+//CARTA ADICIONAL BOCA ABAJO 
+const voltearCarta = (id: string): void => {
+    const volteo = document.getElementById(id);
+    if(volteo && volteo instanceof HTMLImageElement){
+        volteo.src = cogerImagenCarta(13);
+    }
+}
+
 
 //FUNCION QUE NOS INICIE EL JUEGO 
 function handleNuevaPartida () : void {
     score = 0;
     mostrarPuntuacion(score);
-    activarBotones();
-    ocultarCartaAdicional();
+    activarBoton("boton-dameCarta");
+    activarBoton("boton-plantarse");
+    ocultarCarta("carta-adicional");
+    ocultarBoton("boton-mostrar-carta-adicional")
     mostrarMensaje("Suerte!");
     mostarCartaObtenida(13);
+    voltearCarta("carta-adicional");
 };
 handleNuevaPartida();
 
@@ -238,3 +245,5 @@ const botonNuevaPartida = document.getElementById("nueva-partida");
     if(botonNuevaPartida !== null && botonNuevaPartida !== undefined && botonNuevaPartida instanceof HTMLButtonElement) {
         botonNuevaPartida.addEventListener("click", handleNuevaPartida);   
     }
+
+
