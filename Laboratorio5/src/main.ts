@@ -18,7 +18,6 @@ const mostrarMensaje = (texto : string) : void => {
         }
 
 };
-mostrarMensaje("Suerte!");
 
 const mostrarPuntuacion = (numero : number) : void => {
     const pantallaPuntuacion = document.getElementById("puntuacion");
@@ -170,6 +169,7 @@ const handleMostrarCartaAdicional = () : void =>{
 
         mostrarCartaAdicional("carta-adicional");
         mostrarBoton("boton-mostrar-carta-adicional");
+        voltearCarta("carta-adicional");
     }
 };
 
@@ -180,20 +180,7 @@ const mostrarCartaAdicional = (id: string): void => {
         imagenCartaAdicional.style.display = "inline";
     }
 };
-const mostrarBoton = (id: string): void => {
-    const botonMostrado = document.getElementById(id);
-    if(botonMostrado && botonMostrado instanceof HTMLButtonElement){
-        botonMostrado.style.display = "inline";
-    }
-};
-
 //OCULTAR 
-const ocultarBoton = (id: string) : void => {
-    const botonOcultado = document.getElementById(id);
-    if( botonOcultado && botonOcultado instanceof HTMLButtonElement){
-        botonOcultado.style.display= "none";
-    }
-};
 const ocultarCarta = (id: string): void => {
     const cartaOcultada = document.getElementById(id);
     if(cartaOcultada && cartaOcultada instanceof HTMLImageElement){
@@ -231,8 +218,19 @@ const initBoton = (): void =>{
     if(botonDameCarta && botonDameCarta instanceof HTMLButtonElement){
         botonDameCarta.addEventListener("click", handlePedirCarta);
     } 
-
-}
+};
+const ocultarBoton = (id: string) : void => {
+    const botonOcultado = document.getElementById(id);
+    if( botonOcultado && botonOcultado instanceof HTMLButtonElement){
+        botonOcultado.style.display= "none";
+    }
+};
+const mostrarBoton = (id: string): void => {
+    const botonMostrado = document.getElementById(id);
+    if(botonMostrado && botonMostrado instanceof HTMLButtonElement){
+        botonMostrado.style.display = "inline";
+    }
+};
 
 //FUNCION QUE NOS INICIE EL JUEGO 
 function handleNuevaPartida () : void {
@@ -243,8 +241,9 @@ function handleNuevaPartida () : void {
     ocultarCarta("carta-adicional");
     ocultarBoton("boton-mostrar-carta-adicional")
     mostarCartaObtenida(13);
-    voltearCarta("carta-adicional");
+    mostrarMensaje("Suerte!");
     initBoton();
+
 };
 
 document.addEventListener('DOMContentLoaded', handleNuevaPartida);
