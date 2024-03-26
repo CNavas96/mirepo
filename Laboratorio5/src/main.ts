@@ -1,5 +1,4 @@
 //1. Mostrar puntuación
-
 let score: number = 0;
 let cartaAdicional: number = 0;
 
@@ -18,8 +17,6 @@ const mostrarPuntuacion = (numero : number) : void => {
             pantallaPuntuacion.textContent = numero.toString();
         }
 };
-mostrarMensaje("Suerte");
-mostrarPuntuacion(score);
 
 // Coger IMAGEN
 const cogerImagenCarta = (carta: number) : string => {
@@ -45,7 +42,8 @@ const cogerImagenCarta = (carta: number) : string => {
         case 11: imagenCarta = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/11_caballo-copas.jpg";
             break;
         case 12: imagenCarta = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/12_rey-copas.jpg";
-            break;  
+            break;
+        case 13:  imagenCarta = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/back.jpg"
     }
     return imagenCarta;
 };
@@ -161,7 +159,7 @@ const ocultarCartaAdicional = () : void =>{
         botonCartaAdicional.style.display = "none";
         imagenCartaAdicional.src = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/back.jpg";
     }
-}
+};
 const mostrarCartaAdicional = () : void =>{
     if(score < 7.5){
         cartaAdicional = dameCarta();
@@ -175,7 +173,7 @@ const mostrarCartaAdicional = () : void =>{
             imagenCartaAdicional.src = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/back.jpg"; 
             }
     }
-}
+};
 
 //BOTON CARTA ADICIONAL
 const botonCartaAdicional = document.getElementById("boton-mostrar-carta-adicional");
@@ -212,7 +210,17 @@ const activarBotones = () : void => {
 
 
 
-
+//Ocultar carta Adicional
+const ocultarCarta = () : void =>{
+    const imagenCartaAdicional = document.getElementById("carta-adicional");
+    const botonCartaAdicional = document.getElementById("boton-mostrar-carta-adicional");
+    if (imagenCartaAdicional !== null && imagenCartaAdicional !== undefined && imagenCartaAdicional instanceof HTMLImageElement &&
+        botonCartaAdicional !== null && botonCartaAdicional !== undefined && botonCartaAdicional instanceof HTMLButtonElement) {
+        imagenCartaAdicional.style.display = "none";
+        botonCartaAdicional.style.display = "none";
+        imagenCartaAdicional.src = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/back.jpg";
+    }
+};
 
 //FUNCION QUE NOS INICIE EL JUEGO 
 function handleNuevaPartida () : void {
@@ -221,9 +229,10 @@ function handleNuevaPartida () : void {
     activarBotones();
     ocultarCartaAdicional();
     mostrarMensaje("Suerte!");
+    mostarCartaObtenida(13);
 };
-
 handleNuevaPartida();
+
 //BOTON NUEVA PARTIDA
 const botonNuevaPartida = document.getElementById("nueva-partida");
     if(botonNuevaPartida !== null && botonNuevaPartida !== undefined && botonNuevaPartida instanceof HTMLButtonElement) {
