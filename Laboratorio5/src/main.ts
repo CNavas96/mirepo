@@ -18,6 +18,8 @@ const mostrarMensaje = (texto : string) : void => {
         }
 
 };
+mostrarMensaje("Suerte!");
+
 const mostrarPuntuacion = (numero : number) : void => {
     const pantallaPuntuacion = document.getElementById("puntuacion");
 
@@ -108,11 +110,6 @@ const actualizacionScore = (nuevaActualizacionScore: number) : number =>{
     score += scoreActualizado;
     return score;
 };
-// BOTON PEDIR CARTA
-const botonDameCarta = document.getElementById("boton-dameCarta");
-    if(botonDameCarta && botonDameCarta instanceof HTMLButtonElement){
-        botonDameCarta.addEventListener("click", handlePedirCarta);
-    } 
 
 
 
@@ -137,11 +134,6 @@ const mensajeResultado = () : void =>{
         
 };
 
-//BOTON PLANTARSE
-const botonPlantarse = document.getElementById("boton-plantarse");
-    if(botonPlantarse && botonPlantarse instanceof HTMLButtonElement) {
-        botonPlantarse.addEventListener("click", handlePlantarse);
-    }
 
 // DESACTIVAR y ACTIVAR BOTONES 
 const desactivarBoton = (id: string) : void => {
@@ -162,8 +154,6 @@ const activarBoton = (id: string) : void => {
 };
 
 
-
-
 //CARTA ADICIONAL
 function mostarImagenCartaAdicional () : void {
     const imagenCartaAdicional = document.getElementById("carta-adicional");
@@ -172,14 +162,7 @@ function mostarImagenCartaAdicional () : void {
         imagenCartaAdicional.src = cartaAdicionalSrc;
     }
 };
-//BOTON CARTA ADICIONAL
-const botonCartaAdicional = document.getElementById("boton-mostrar-carta-adicional");
-    if(botonCartaAdicional !== null && botonCartaAdicional !== undefined && botonCartaAdicional instanceof HTMLButtonElement){
-        botonCartaAdicional.addEventListener("click", mostarImagenCartaAdicional);
-        botonCartaAdicional.style.display = "none";
-    }
 
- 
 //OCULTAR Y MOSTRAR CARTA ADICIONAL   
 const handleMostrarCartaAdicional = () : void =>{    
     if(score < puntuacionParaGanar.numero){
@@ -225,6 +208,31 @@ const voltearCarta = (id: string): void => {
     }
 }
 
+//BOTONES
+const initBoton = (): void =>{
+    const botonNuevaPartida = document.getElementById("nueva-partida");
+    const botonCartaAdicional = document.getElementById("boton-mostrar-carta-adicional");
+    const botonPlantarse = document.getElementById("boton-plantarse");
+    const botonDameCarta = document.getElementById("boton-dameCarta");
+
+    if(botonNuevaPartida !== null && botonNuevaPartida !== undefined && botonNuevaPartida instanceof HTMLButtonElement) {
+            botonNuevaPartida.addEventListener("click", handleNuevaPartida);   
+        }
+
+    if(botonCartaAdicional !== null && botonCartaAdicional !== undefined && botonCartaAdicional instanceof HTMLButtonElement){
+        botonCartaAdicional.addEventListener("click", mostarImagenCartaAdicional);
+        botonCartaAdicional.style.display = "none";
+    }
+
+    if(botonPlantarse && botonPlantarse instanceof HTMLButtonElement) {
+        botonPlantarse.addEventListener("click", handlePlantarse);
+    }
+
+    if(botonDameCarta && botonDameCarta instanceof HTMLButtonElement){
+        botonDameCarta.addEventListener("click", handlePedirCarta);
+    } 
+
+}
 
 //FUNCION QUE NOS INICIE EL JUEGO 
 function handleNuevaPartida () : void {
@@ -234,16 +242,13 @@ function handleNuevaPartida () : void {
     activarBoton("boton-plantarse");
     ocultarCarta("carta-adicional");
     ocultarBoton("boton-mostrar-carta-adicional")
-    mostrarMensaje("Suerte!");
     mostarCartaObtenida(13);
     voltearCarta("carta-adicional");
+    initBoton();
 };
-handleNuevaPartida();
 
-//BOTON NUEVA PARTIDA
-const botonNuevaPartida = document.getElementById("nueva-partida");
-    if(botonNuevaPartida !== null && botonNuevaPartida !== undefined && botonNuevaPartida instanceof HTMLButtonElement) {
-        botonNuevaPartida.addEventListener("click", handleNuevaPartida);   
-    }
+document.addEventListener('DOMContentLoaded', handleNuevaPartida);
+
+
 
 
