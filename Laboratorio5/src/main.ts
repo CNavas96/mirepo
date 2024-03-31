@@ -203,7 +203,7 @@ const initBoton = (): void =>{
     const botonDameCarta = document.getElementById("boton-dameCarta");
 
     if(botonNuevaPartida !== null && botonNuevaPartida !== undefined && botonNuevaPartida instanceof HTMLButtonElement) {
-            botonNuevaPartida.addEventListener("click", handleNuevaPartida);   
+            botonNuevaPartida.addEventListener("click", handleResetPartida);   
         }
 
     if(botonCartaAdicional !== null && botonCartaAdicional !== undefined && botonCartaAdicional instanceof HTMLButtonElement){
@@ -232,8 +232,8 @@ const mostrarBoton = (id: string): void => {
     }
 };
 
-//FUNCION QUE NOS INICIE EL JUEGO 
-function handleNuevaPartida () : void {
+//FUNCION RESET PARTIDA
+function handleResetPartida () : void {
     score = 0;
     mostrarPuntuacion(score);
     activarBoton("boton-dameCarta");
@@ -241,12 +241,19 @@ function handleNuevaPartida () : void {
     ocultarCarta("carta-adicional");
     ocultarBoton("boton-mostrar-carta-adicional")
     mostarCartaObtenida(13);
-    mostrarMensaje("Suerte!");
-    initBoton();
-
+    mostrarMensaje("Vamos de nuevo");
 };
 
-document.addEventListener('DOMContentLoaded', handleNuevaPartida);
+
+//Funcion que inicia el juego
+
+const empiezaPartida = () =>{
+    mostrarPuntuacion(score);
+    mostrarMensaje("Suerte!");  
+    initBoton();
+};
+
+document.addEventListener('DOMContentLoaded', empiezaPartida);
 
 
 
