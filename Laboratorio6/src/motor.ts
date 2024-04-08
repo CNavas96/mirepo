@@ -1,4 +1,4 @@
-import { partida, puntuacion} from "./modelo";
+import { EstadoPartida, partida, puntuacion} from "./modelo";
 import {
     desactivarBoton, 
     handleMostrarCartaAdicional, 
@@ -14,6 +14,7 @@ import {
 //PEDIR CARTA 
 let numeroAletorio = () => Math.ceil(Math.random() * 10);
 
+//
 export const dameCarta = () : number => {
     let cartaAleatoria = numeroAletorio();
 
@@ -23,6 +24,7 @@ export const dameCarta = () : number => {
     return cartaAleatoria;
 };
 
+//
 export const puntuacionCartaObtenida = (puntuacionCarta: number) : number  => {
     let cartaObtenidaPuntuacion = puntuacionCarta;
     if(cartaObtenidaPuntuacion >= puntuacion.diezCopas){
@@ -47,15 +49,15 @@ export function handlePlantarse () : void {
 
 //MENSAJE SEGUN PUNTUACION DESPUES PLANTARSE
 const mensajeResultado = () : void =>{
-            if(partida.score <= puntuacion.cuatroCopas || partida.score < puntuacion.cincoCopas){
-                mostrarMensaje("Has sido muy conservador");
-            } else if(partida.score === puntuacion.cincoCopas || partida.score < puntuacion.seisCopas){
-                mostrarMensaje("No huele un poco raro aqui?");
-            } else if(partida.score >= puntuacion.seisCopas && partida.score <= puntuacion.sieteCopas){
-                mostrarMensaje("Por porquito...");
-            } else if(partida.score === puntuacion.numeroParaGanar){
-                mostrarMensaje("LETS FUCKING GO!!! LO HAS LOGRADO");
-            }
+    if(partida.score <= puntuacion.cuatroCopas || partida.score < puntuacion.cincoCopas){
+        mostrarMensaje("Has sido muy conservador");
+    } else if(partida.score === puntuacion.cincoCopas || partida.score < puntuacion.seisCopas){
+        mostrarMensaje("¿No huele un poco raro aqui?");
+    } else if(partida.score >= puntuacion.seisCopas && partida.score <= puntuacion.sieteCopas){
+        mostrarMensaje("Por porquito...");
+    } else if(partida.score === puntuacion.numeroParaGanar){
+        mostrarMensaje("LETS FUCKING GO!!! LO HAS LOGRADO");
+    }
         
 };
 
@@ -101,4 +103,15 @@ export function handleResetPartida () : void {
     ocultarBoton("boton-mostrar-carta-adicional")
     mostarCartaObtenida(13);
     mostrarMensaje("Vamos de nuevo");
+};
+ 
+//
+export const obtenerEstadoPartida = () : EstadoPartida => {
+    if(partida.score === puntuacion.numeroParaGanar){
+        partida.estadoPartida = "HAS_LLEGADO_A_LA_PUNTUACION";
+    }
+    if(partida.score > puntuacion.numeroParaGanar){
+        partida.estadoPartida = "HAS_SUPERADO_LA_PUNTUACION";
+    }
+    return partida.estadoPartida;
 };

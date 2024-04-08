@@ -6,6 +6,7 @@ import {
     cogerImagenCarta,
     handlePlantarse,
     handleResetPartida,
+    obtenerEstadoPartida,
 } from "./motor";
 
 //1. Mostrar MENSAJE, PUNTUACION U CARTA OBTENIDA
@@ -45,7 +46,7 @@ export function handlePedirCarta() : void {
             const nuevoScore = actualizacionScore(puntuacionObtenida);
             mostrarPuntuacion(nuevoScore);
           
-            if (partida.score > puntuacion.numeroParaGanar){
+            if (obtenerEstadoPartida() === "HAS_SUPERADO_LA_PUNTUACION"){
                 mostrarMensaje("GAME OVER");
                 desactivarBoton("boton-dameCarta");
                 desactivarBoton("boton-plantarse")

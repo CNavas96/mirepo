@@ -1,11 +1,13 @@
 interface Partida {
     score: number,
     cartaAdicional: number,
+    estadoPartida: EstadoPartida,
 }
 
 export const partida: Partida = {
     score: 0,
     cartaAdicional: 0,
+    estadoPartida: "NO_HAS_LLEGADO_A_LA_PUNTUACION",
 };
 
 
@@ -26,8 +28,6 @@ export const puntuacion: Puntuacion = {
     diezCopas: 10,
 };
 
-
-//NO ME QUEDA CLARO DONDE AÑADIRLO EN EL CODIGO
 export type EstadoPartida = 
     | "NO_HAS_LLEGADO_A_LA_PUNTUACION"
     | "HAS_LLEGADO_A_LA_PUNTUACION"
