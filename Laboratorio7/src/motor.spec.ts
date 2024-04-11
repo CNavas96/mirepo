@@ -7,7 +7,8 @@ describe("obtenerEstadoPartida", () => {
     it("Deberia de devolver NO_HAS_LLEGADO_A_LA_PUNTUACION cuando el score llega a 7.5", () => {
         //Arrange
         const estadoEsperado : EstadoPartida = "NO_HAS_LLEGADO_A_LA_PUNTUACION"
-        
+        vi.spyOn(partida, "score", "get").mockReturnValue(5);
+
         //Act
         const resultado = obtenerEstadoPartida();
 
