@@ -25,6 +25,7 @@ export const sePuedeVoltearLaCarta = (tablero: Tablero, indice: number ): boolea
       carta.encontrada = true;
       voltearLaCarta(tablero, indice, tablero.cartas[indice].estaVuelta);
     } 
+    
 
   return carta.encontrada && carta.estaVuelta;
 };

@@ -33,8 +33,6 @@ if(botonEmpezarPartida && botonEmpezarPartida instanceof HTMLButtonElement){
 };
 
 //crear divs y mostrarImagenes
-
-
 const crearDivCarta = (tablero: Tablero, indice: number): HTMLDivElement => {
     const nuevoDiv = document.createElement("div");
     nuevoDiv.classList.add("contenedor");
@@ -69,79 +67,98 @@ const crear12Divs = (tablero: Tablero): void => {
 };
 
 
-
 const manejarClickCarta = (tablero: Tablero, indice: number): void => {
-    comprobarCartaEstaVuelta(indice);
+    comprobarCartaEstaVueltaAvisaAlJugador(indice);
 
-
+    // voltea la carta
     if (!sePuedeVoltearLaCarta(tablero, indice)) {
         console.log("No se puede voltear la carta");
         return;
     }
 
-    // voltea la carta y asigna el índice al correspondiente indicador.
-    const carta = tablero.cartas[indice];
-    carta.estaVuelta = true;
-
+   //asigna el índice al correspondiente indicador
     if (tablero.indiceCartaVolteadaA === undefined) {
         tablero.indiceCartaVolteadaA = indice;
         tablero.estadoPartida = "UnaCartaLevantada";
+
     } else if (tablero.indiceCartaVolteadaB === undefined) {
         tablero.indiceCartaVolteadaB = indice;
         tablero.estadoPartida = "DosCartasLevantadas";
         
+
         //voltear la segunda carta y  verificar si son pareja.
         const sonP = sonPareja(tablero.indiceCartaVolteadaA, tablero.indiceCartaVolteadaB, tablero);
         if (sonP) {
             parejaEncontrada(tablero, tablero.indiceCartaVolteadaA, tablero.indiceCartaVolteadaB);
-
             tablero.indiceCartaVolteadaA = undefined;
             tablero.indiceCartaVolteadaB = undefined;
 
+
             //la partida ha terminado???
-            if (esPartidaCompleta(tablero)) {
-                tablero.estadoPartida = "PartidaCompleta";
-                alert("¡ENHORABUENA, LO HAS LOGRADO! Has completado la partida en " + tablero.intentos + " intentos.");
-            } else {
-                tablero.estadoPartida = "CeroCartasLevantadas";
-            }
+            preguntaFinalizarPartida(tablero); 
+
         } else {
             if (tablero.indiceCartaVolteadaA !== undefined && tablero.indiceCartaVolteadaB !== undefined) {
                 const indiceA = tablero.indiceCartaVolteadaA;
                 const indiceB = tablero.indiceCartaVolteadaB;
             
+
+                //si no son pareja se revierte el tablero y te muesta los intentos
                 if (!sonPareja(indiceA, indiceB, tablero)) {
-                    // Si no son pareja, revertir el volteo después de un breve retraso para que se vea el resultado.
-                    setTimeout(() => {
-                        parejaNoEncontrada(tablero, indiceA, indiceB);
-            
-
-                        // Actualizamos el estado de la partida y reiniciamos los índices.
-                        tablero.estadoPartida = "CeroCartasLevantadas";
-                        tablero.indiceCartaVolteadaA = undefined;
-                        tablero.indiceCartaVolteadaB = undefined;
-            
-                        // Volvemos a poner boca abajo las cartas.
-                        voltearLaCarta(tablero, indiceA, tablero.cartas[indiceA].estaVuelta);
-                        voltearLaCarta(tablero, indiceB, tablero.cartas[indiceB].estaVuelta);
-
-                         //para los intentos
-                        tablero.intentos += 1
-                        console.log(tablero.intentos);
-                    }, 1000);
+                    revertirConTimeOut(tablero, indiceA, indiceB);
+                    mostrarIntentos(tablero);
                 }
             }
         }
     }
 };
 
+const revertirConTimeOut = (tablero: Tablero, indiceA: number, indiceB: number):void => {
+    // Si no son pareja, revertir el volteo después de un breve retraso para que se vea el resultado.
+    setTimeout(() => {
+        parejaNoEncontrada(tablero, indiceA, indiceB);
 
 
-const comprobarCartaEstaVuelta = (indice: number): void => {
+        // Actualizamos el estado de la partida y reiniciamos los índices.
+        tablero.estadoPartida = "CeroCartasLevantadas";
+        tablero.indiceCartaVolteadaA = undefined;
+        tablero.indiceCartaVolteadaB = undefined;
+
+        // Volvemos a poner boca abajo las cartas.
+        voltearLaCarta(tablero, indiceA, tablero.cartas[indiceA].estaVuelta);
+        voltearLaCarta(tablero, indiceB, tablero.cartas[indiceB].estaVuelta);
+    
+    }, 1000);
+}
+
+
+const mostrarIntentos = (tablero: Tablero): void =>  {
+    const intentosSpan = document.getElementById("intentos"); 
+
+        if(intentosSpan && intentosSpan instanceof HTMLSpanElement){
+            intentosSpan.textContent =`Intentos ${tablero.intentos += 1}`; 
+        }
+
+};
+
+
+const preguntaFinalizarPartida = (tablero: Tablero): void => {
+    //la partida ha terminado???
+    if (esPartidaCompleta(tablero)) {
+        tablero.estadoPartida = "PartidaCompleta";
+        alert("¡ENHORABUENA, LO HAS LOGRADO! Has completado la partida en " + tablero.intentos + " intentos.");
+    } else {
+        tablero.estadoPartida = "CeroCartasLevantadas";
+    }
+};
+
+
+
+const comprobarCartaEstaVueltaAvisaAlJugador = (indice: number): void => {
     const carta = tablero.cartas[indice];
      
-     if (carta.estaVuelta) {
-         alert("Esta carta ya está volteada.");
-         return; 
-     } 
+    if (carta.estaVuelta) {
+        alert("Esta carta ya está volteada.");
+        return; 
+    } 
 };
