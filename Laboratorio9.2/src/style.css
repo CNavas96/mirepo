@@ -6,58 +6,8 @@
 
 
 body {
-  background-color: #f5f5f5;
+  background-color: #cec4c4;
   font-family: Arial, sans-serif;
   padding: 20px;
 }
 
-.ticket {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin: auto;
-  width: 300px;
-  text-align: center;
-}
-
-.ticket h2 {
-  margin-top: 0;
-  font-size: 24px;
-}
-
-.ticket p {
-  margin: 5px 0;
-  font-size: 18px;
-}
-
-.ticket .precio {
-  font-weight: bold;
-  font-size: 20px;
-}
-
-
-#nombre-producto {
-  color: blue;
-  text-decoration: underline;
-}
-
-#precioSinIva-producto{
-  text-align: left;
-  font-size: 16px;
-}
-
-#tipoIVa-producto{
-  text-align: left;
-  font-size: 16px;
-}
-
-#precioConIva-producto{
-  text-align: left;
-  font-size: 16px;
-}
-
-#total-producto{
-  text-align: left;
-  margin-top: 24px;
-}
