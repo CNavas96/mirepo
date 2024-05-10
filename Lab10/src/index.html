@@ -12,15 +12,22 @@
     <body>
       <div class="root">
         <h1>Personajes de Moratadelo y Filemón</h1> 
+       
         <div>
-          <input type="text">
-          <button>
-            <a href="#">Filtar</a>
+          <input type="text" placeholder="nombre" id="input-buscar">
+          <button id="boton-buscar">
+            <a href="#" >Buscar</a>
           </button>
         </div>
-        <div class="listado-personajes"></div>
+     
+        
       </div>
+      <div class="personajes-contenedor">
+        <div class="listado-personajes" id="listado-personajes"></div>
+      </div>
+
+      <div id="resultado-busqueda"></div>
   </body>
 
-  <script src="./personajes/personajes.ts"></script>
+  <script type="module" src="./personajes/personajes.ts"></script>
 </html>

@@ -13,7 +13,7 @@
         font-family: var(--font-family);
         line-height: 1;
         background-color: var(--bg-color);
-        overflow: hidden;
+       
     }
     h1 {
         font-size: 2.5rem;
@@ -31,6 +31,10 @@
         text-decoration: none;
         color: inherit;
         cursor: pointer;
+    }
+    input {
+        padding: 12px 24px;;
+        font-size: 16px;
     }
     button {
         display: inline-block;
@@ -55,7 +59,7 @@
         align-items: center;
         justify-content: center;
         gap: 20px;
-        height: 100vh;
+        height: 50vh;
     }
     .main {
         display: flex;
@@ -66,50 +70,31 @@
         position: relative;
     }
 
-    .listado-personajes {
-        width: 85%;
-        margin: 0 auto;
-    }
+   
+    .contenedor {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        margin-top: 20px;
+       }
+       
+
     .personaje-contenedor {
-     display: grid;
-     grid-template-columns: 5% repeat(4, 1fr);
-     grid-gap: 10px;
-     align-items: center;
-     justify-content: space-between;
-     border: 1px solid #dee2e6;
-     padding: 10px;
+        display: flex;
+        flex-direction: column; 
+        align-items: center; 
+        gap: 10px; 
+        padding: 10px;
+        border: 1px solid #ccc; 
+        background-color: #f9f9f9;
     }
+
     .personaje-contenedor img {
      max-width: 60px;
     }
-    .grupo-botones {
-     display: flex;
-     justify-content: center;
-     gap: 10px;
-     margin-bottom: 10px;
-    }
-    .boton-editar,
-    .boton-borrar {
-     width: 80px;
-     padding: 8px;
-    }
-    .contenedor-h1 {
-     position: sticky;
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     gap: 10px;
-     top: 0;
-     width: 100%;
-     background-color: var(--bg-color);
-     z-index: 1;
-    }
-    .cabecera-h1 {
-     background-color: var(--bg-color);
-     padding: 16px;
-     text-align: center;
-    }
-    
+
 
     @media screen and (max-width: 1200px) {
         .personaje-contenedor {
@@ -122,35 +107,16 @@
             text-align: center;
         }
 
-        .pelicula-contedeor img{
+        .personaje-contedeor img{
             max-width: 300px;
         }
     }
 
-
-
-    .contenedor {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 20px;
-        margin-top: 20px;
-       }
-       
-
-    .card {
-        background-color: #fff;
-        border-radius: 4px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        width: 800px;
+    .listado-personajes {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 15px; 
+        max-width: 800px; 
+        margin: 0 auto; 
     }
-       
-    @media screen and (max-width: 800px) {
-        .card {
-            width: 100%;
-        }
-    }
-       
-
 
