@@ -1,0 +1,44 @@
+.select {
+    width: 200px;
+}
+
+.container {
+    border: none;
+    padding: 40px 0;
+    
+}
+
+.form-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+    border-bottom: 1px solid var(--secondary_color);
+}
+   
+.form-container div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.form-container label {
+    margin-right: 20px;
+    min-width: 300px;
+    text-align: right;
+}
+
+.form-container input {
+    width: 200px;
+}
+
+.button {
+    margin: 10px 0 10px 420px;
+    border: none;
+    
+}
+
+.error {
+    color: var(--error_color);
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+}
